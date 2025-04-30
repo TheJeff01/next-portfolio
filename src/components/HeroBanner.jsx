@@ -22,7 +22,7 @@ const buttonVariantsRight = {
 };
 function HeroBanner() {
   return (
-    <main className="container max-w-7xl mx-auto w-full px-4 text-center mt-[64px] lg:mt-90px">
+    <main className="container max-w-7xl mx-auto w-full px-4 text-center mt-[64px] mb-[70px] lg:mt-90px">
       <div className="mb-[42px]">
         <motion.h1
           initial="hidden"
