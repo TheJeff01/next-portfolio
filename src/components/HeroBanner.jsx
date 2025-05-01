@@ -22,7 +22,7 @@ const buttonVariantsRight = {
 };
 function HeroBanner() {
   return (
-    <main className="container max-w-7xl mx-auto w-full px-4 text-center mt-[64px] mb-[70px] lg:mt-90px">
+    <main className="container flex flex-col items-center max-w-7xl mx-auto w-full px-4 text-center mt-[64px] mb-[70px] lg:mt-90px">
       <div className="mb-[42px]">
         <motion.h1
           initial="hidden"
@@ -44,7 +44,7 @@ function HeroBanner() {
           initial="hidden"
           whileInView="reveal"
           transition={{ staggerChildren: 0.02 }}
-          className="mb-[12px]"
+          className="mb-[12px] text-[20px] lg:[24px]"
         >
           {skills.split("").map((char, index) => (
             <motion.span
@@ -60,6 +60,7 @@ function HeroBanner() {
           initial="hidden"
           whileInView="reveal"
           transition={{ staggerChildren: 0.02 }}
+          className="text-[16px] lg:text-[20px] max-w-[700px]"
         >
           {intro.split("").map((char, index) => (
             <motion.span
@@ -72,7 +73,7 @@ function HeroBanner() {
           ))}
         </motion.p>
       </div>
-      <motion.div className="flex justify-center gap-10 items-center">
+      <motion.div className="flex justify-center gap-10 items-center text-[14px] lg:text-[20px]">
         <motion.button
           className="bg-[#4285f4] text-white py-[14px] px-[28px] rounded-[50px]"
           initial="hidden"

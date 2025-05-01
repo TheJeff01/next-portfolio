@@ -25,8 +25,8 @@ export default function QuoteGenerator() {
       author: "Steve Jobs"
     },
     {
-      text: "If life were predictable it would cease to be life, and be without flavor.",
-      author: "Eleanor Roosevelt"
+      text: "When you become lazy, it's disrespectful to those who believe in you",
+      author: "Kobe Bryant"
     },
     {
       text: "If you set your goals ridiculously high and it's a failure, you will fail above everyone else's success.",
@@ -37,16 +37,20 @@ export default function QuoteGenerator() {
       author: "John Lennon"
     },
     {
-      text: "Spread love everywhere you go. Let no one ever come to you without leaving happier.",
-      author: "Mother Teresa"
+      text: "Innovation distinguishes between a leader and a follower.",
+      author: "Steve Jobs"
     },
     {
-      text: "When you reach the end of your rope, tie a knot in it and hang on.",
-      author: "Franklin D. Roosevelt"
+      text: "Success isn't always about greatness. It's about consistency. Consistent hard work leads to success. Greatness will come.",
+      author: "Dwayne Johnson"
     },
     {
-      text: "Always remember that you are absolutely unique. Just like everyone else.",
-      author: "Margaret Mead"
+      text: "Why worship legends when you know you can join them",
+      author: "Lil Nas X"
+    },
+    {
+      text: "I never dreamt of success. I worked for it.",
+      author: "Estée Lauder"
     },
     {
       text: "The future belongs to those who believe in the beauty of their dreams.",
@@ -112,11 +116,11 @@ export default function QuoteGenerator() {
   }, [displayedQuote, displayedAuthor, quote, isTyping]);
 
   return (
-    <div className="flex flex-col items-center justify-center container">
+    <div className="flex flex-col items-center justify-center container max-w-7xl mx-auto w-full px-4 mb-[70px] text-[16px] lg:text-[34px]">
         
         <div className=" flex flex-col justify-center">
           <motion.p 
-            className="text-xl mb-4 text-gray-700 leading-relaxed border-[2px] p-[10px] w-[680px]"
+            className="text-xl text-black leading-relaxed border-[2px] p-[10px] w-[100%] md:w-[680px] lg:w-[680px] "
             key={quote.text}
           >
             "{displayedQuote}<motion.span
@@ -128,7 +132,7 @@ export default function QuoteGenerator() {
             </motion.span>"
           </motion.p>
           <motion.p 
-            className="text-right italic text-gray-500 text-lg mt-2 border-[2px] max-w-[180px]"
+            className="text-right italic text-black text-lg border-[2px] max-w-[180px] border-t-0"
             key={quote.author}
           >
             {displayedAuthor.length > 0 ? `— ${displayedAuthor}` : ""}
