@@ -55,7 +55,7 @@ const techStack = [
 
 function TechStack() {
   return (
-    <main>
+    <main className="">
       {techStack.map((option, index) => (
         <React.Fragment key={index}>
           <TechStackCard

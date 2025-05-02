@@ -132,7 +132,7 @@ export default function QuoteGenerator() {
             </motion.span>"
           </motion.p>
           <motion.p 
-            className="text-right italic text-black text-lg border-[2px] max-w-[180px] border-t-0"
+            className="flex justify-end item-center w-full text-right italic text-black text-lg border-[2px] max-w-[180px] border-t-0 " 
             key={quote.author}
           >
             {displayedAuthor.length > 0 ? `— ${displayedAuthor}` : ""}
