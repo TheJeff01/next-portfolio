@@ -1,8 +1,31 @@
+"use client";
+import splitStringUsingRegex from "./utils/splitStringUsingRegex";
+import { motion } from "framer-motion";
+import React from "react";
+
+const charVariants = {
+  hidden: { opacity: 0 },
+  reveal: { opacity: 1 },
+};
 function ProblemSolverBrief(props) {
   return (
     <div className="flex flex-col text-[20px] lg:text-[24px] mb-[25px] ">
       <div className="mb-[10px] text-[30px]">{props.boxicon}</div>
-      <p>{props.text}</p>
+      <motion.p
+        initial="hidden"
+        whileInView="reveal"
+        transition={{ staggerChildren: 0.02 }}
+      >
+        {props.text.split("").map((char, index) => (
+          <motion.span
+            key={index}
+            transition={{ duration: 0.5 }}
+            variants={charVariants}
+          >
+            {char}
+          </motion.span>
+        ))}
+      </motion.p>
     </div>
   );
 }
