@@ -9,7 +9,7 @@ export default function Home() {
       <NavBar />
       <HeroBanner />
       <QuoteComponent />
-      <ProblemSolver />
+      {/* <ProblemSolver /> */}
       <TechStack />
     </main>
   );

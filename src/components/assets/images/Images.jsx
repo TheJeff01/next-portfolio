@@ -3,4 +3,5 @@ export const Images = {
   contact: require("./svgs/contact.svg").default.src,
   menu: require("./svgs/menu.svg").default.src,
   hoodImage: require("./Hood-image.png").default.src,
+  jeff: require("./Jeff.png").default.src
 };

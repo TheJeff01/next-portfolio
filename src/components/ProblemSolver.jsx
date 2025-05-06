@@ -1,5 +1,6 @@
 "use client";
 import { MdCheckBoxOutlineBlank } from "react-icons/md";
+import { Images } from "./assets/images/Images";
 import splitStringUsingRegex from "./utils/splitStringUsingRegex"; // fixed typo
 import ProblemSolverBrief from "./ProblemSolverBrief";
 import { motion } from "framer-motion";
@@ -66,12 +67,18 @@ function ProblemSolver() {
             ))}
           </motion.p>
         </div>
-        <div>
-          {data.map((option, index) => (
-            <React.Fragment key={index}>
-              <ProblemSolverBrief boxicon={option.boxicon} text={option.text} />
-            </React.Fragment>
-          ))}
+        <div className="flex flex-col lg:flex-row lg:items-center">
+          <div>
+            {data.map((option, index) => (
+              <React.Fragment key={index}>
+                <ProblemSolverBrief
+                  boxicon={option.boxicon}
+                  text={option.text}
+                />
+              </React.Fragment>
+            ))}
+          </div>
+          <img src={Images.jeff} alt="jeffery ibeh" className="max-width-[500px] height-[100%]"/>
         </div>
       </div>
     </main>
