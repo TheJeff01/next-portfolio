@@ -31,14 +31,14 @@ const data = [
 
 function ProblemSolver() {
   return (
-    <main className="container max-w-7xl mx-auto w-full px-4">
+    <main className="container max-w-7xl mx-auto w-full px-4 mb-[70px] lg:mb-[90px]">
       <div className="border-b-[2px]">
-        <div className="text-center mb-[34px] lg:mb-[80px] ">
-          <motion.h1
+        <div className="text-center">
+          <motion.h2
             initial="hidden"
             whileInView="reveal"
             transition={{ staggerChildren: 0.02 }}
-            className="text-[48px] mb-[12px] lg:text-[70px] font-bold"
+            className="text-[30px] mb-[12px] lg:text-[60px] font-bold"
           >
             {heading.split("").map((char, index) => (
               <motion.span
@@ -49,7 +49,7 @@ function ProblemSolver() {
                 {char}
               </motion.span>
             ))}
-          </motion.h1>
+          </motion.h2>
           <motion.p
             initial="hidden"
             whileInView="reveal"
@@ -67,7 +67,7 @@ function ProblemSolver() {
             ))}
           </motion.p>
         </div>
-        <div className="flex flex-col lg:flex-row lg:items-center">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:align-baseline justify-between">
           <div>
             {data.map((option, index) => (
               <React.Fragment key={index}>
@@ -78,7 +78,7 @@ function ProblemSolver() {
               </React.Fragment>
             ))}
           </div>
-          <img src={Images.jeff} alt="jeffery ibeh" className="max-width-[500px] height-[100%]"/>
+          <img src={Images.jeff} alt="jeffery ibeh" className="w-full max-w-xs md:max-w-sm lg:max-w-md xl:max-w-lg h-auto object-cover"/>
         </div>
       </div>
     </main>

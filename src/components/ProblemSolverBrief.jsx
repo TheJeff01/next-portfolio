@@ -9,7 +9,7 @@ const charVariants = {
 };
 function ProblemSolverBrief(props) {
   return (
-    <div className="flex flex-col text-[20px] lg:text-[24px] mb-[25px] ">
+    <div className="flex flex-col text-[16px] max-w-[500px] justify-between lg:text-[20px] mb-[40px] ">
       <div className="mb-[10px] text-[30px]">{props.boxicon}</div>
       <motion.p
         initial="hidden"
