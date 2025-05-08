@@ -55,7 +55,7 @@ const techStack = [
 
 function TechStack() {
   return (
-    <main className="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto w-full">
+    <main className="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto w-full mb-[70px] lg:mb-[90px]">
       {techStack.map((option, index) => (
         <React.Fragment key={index}>
           <TechStackCard

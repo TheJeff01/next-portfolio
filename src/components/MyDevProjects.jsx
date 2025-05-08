@@ -1,6 +1,9 @@
 "use client";
+import React from "react";
+import ProjectCard from "./ProjectCard";
 import splitStringUsingRegex from "./utils/splitStringUsingRegex";
 import { motion } from "framer-motion";
+import Images from "next/image";
 
 const heading = "My {dev} projects";
 const intro = "From Websites to javascript projects";
@@ -8,6 +11,28 @@ const charVariants = {
   hidden: { opacity: 0 },
   reveal: { opacity: 1 },
 };
+
+const projects = [
+  {
+    thumbnail: Images.placeholder,
+    techstack: "NextJS CSS Tailwind",
+    heading: "Blank",
+    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  },
+  {
+    thumbnail: Images.placeholder,
+    techstack: "NextJS CSS Tailwind",
+    heading: "Blank",
+    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+
+  },
+  {
+    thumbnail: Images.placeholder,
+    techstack: "NextJS CSS Tailwind",
+    heading: "Blank",
+    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  },
+];
 function MyDevProjects() {
   return (
     <main className="container max-w-7xl mx-auto w-full">
@@ -46,6 +71,18 @@ function MyDevProjects() {
             ))}
           </motion.p>
         </div>
+      </div>
+      <div>
+        {projects.map((option, index) =>(
+          <React.Fragment key={index}>
+            <ProjectCard
+              thumbnail={option.thumbnail}
+              techstack={option.techstack}
+              heading = {option.heading}
+              text = {option.text}
+            />
+          </React.Fragment>
+        ))}
       </div>
     </main>
   );

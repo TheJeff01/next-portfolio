@@ -31,8 +31,8 @@ const data = [
 
 function ProblemSolver() {
   return (
-    <main className="container max-w-7xl mx-auto w-full px-4 mb-[70px] lg:mb-[90px]">
-      <div className="border-b-[2px]">
+    <main className="container max-w-7xl mx-auto w-full px-4 mb-[70px] lg:mb-[90px] border-b-[2px]">
+      <div className="">
         <div className="text-center">
           <motion.h2
             initial="hidden"
@@ -67,7 +67,7 @@ function ProblemSolver() {
             ))}
           </motion.p>
         </div>
-        <div className="flex flex-col lg:flex-row lg:items-center lg:align-baseline justify-between">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:align-baseline justify-between mt-[20px]">
           <div>
             {data.map((option, index) => (
               <React.Fragment key={index}>
