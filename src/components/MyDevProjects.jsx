@@ -3,7 +3,8 @@ import React from "react";
 import ProjectCard from "./ProjectCard";
 import splitStringUsingRegex from "./utils/splitStringUsingRegex";
 import { motion } from "framer-motion";
-import Images from "next/image";
+import { Images } from "./assets/images/Images";
+
 
 const heading = "My {dev} projects";
 const intro = "From Websites to javascript projects";
