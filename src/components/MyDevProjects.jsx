@@ -5,7 +5,6 @@ import splitStringUsingRegex from "./utils/splitStringUsingRegex";
 import { motion } from "framer-motion";
 import { Images } from "./assets/images/Images";
 
-
 const heading = "My {dev} projects";
 const intro = "From Websites to javascript projects";
 const charVariants = {
@@ -15,17 +14,17 @@ const charVariants = {
 
 const projects = [
   {
-    thumbnail: Images.placeholder,
-    techstack: "NextJS CSS Tailwind",
-    heading: "Blank",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    thumbnail: Images.weather,
+    techstack: "HTML CSS ExpressJS",
+    heading: "Weather App",
+    text: "A simple weather application built with HTML, CSS, and Express.js that fetches real-time weather data from the OpenWeatherMap API based on user input. It showcases my ability to work with APIs, handle user requests, and dynamically display external data.",
+    link: "https://weather-project-production-a76b.up.railway.app/",
   },
   {
     thumbnail: Images.placeholder,
     techstack: "NextJS CSS Tailwind",
     heading: "Blank",
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-
   },
   {
     thumbnail: Images.placeholder,
@@ -73,14 +72,15 @@ function MyDevProjects() {
           </motion.p>
         </div>
       </div>
-      <div>
-        {projects.map((option, index) =>(
+      <div  className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {projects.map((option, index) => (
           <React.Fragment key={index}>
             <ProjectCard
               thumbnail={option.thumbnail}
               techstack={option.techstack}
-              heading = {option.heading}
-              text = {option.text}
+              heading={option.heading}
+              text={option.text}
+              link={option.link}
             />
           </React.Fragment>
         ))}
