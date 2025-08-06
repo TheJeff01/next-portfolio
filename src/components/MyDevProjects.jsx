@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 import { Images } from "./assets/images/Images";
 
 const heading = "My {dev} projects";
-const intro = "From Websites to javascript projects";
 const charVariants = {
   hidden: { opacity: 0 },
   reveal: { opacity: 1 },
@@ -54,22 +53,6 @@ function MyDevProjects() {
               </motion.span>
             ))}
           </motion.h2>
-          <motion.p
-            initial="hidden"
-            whileInView="reveal"
-            transition={{ staggerChildren: 0.02 }}
-            className="text-[16px] lg:text-[20px]"
-          >
-            {intro.split("").map((char, index) => (
-              <motion.span
-                key={index}
-                transition={{ duration: 0.35 }}
-                variants={charVariants}
-              >
-                {char}
-              </motion.span>
-            ))}
-          </motion.p>
         </div>
       </div>
       <div  className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">

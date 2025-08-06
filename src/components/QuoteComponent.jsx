@@ -59,27 +59,22 @@ export default function QuoteGenerator() {
   ];
 
   const getRandomQuote = () => {
-    // Reset typing state
     setIsTyping(true);
     setDisplayedQuote("");
     setDisplayedAuthor("");
     
-    // Get a new random quote
     const randomIndex = Math.floor(Math.random() * quotes.length);
     setQuote(quotes[randomIndex]);
   };
 
-  // Effect for auto-changing quotes
   useEffect(() => {
-    // First quote should start typing immediately
     const startTypingTimeout = setTimeout(() => {
       setIsTyping(true);
     }, 500);
     
-    // Change quotes at a comfortable interval
     const intervalId = setInterval(() => {
       getRandomQuote();
-    }, 12000); // Extended to 12 seconds for comfortable reading
+    }, 12000);
     
     return () => {
       clearInterval(intervalId);
@@ -87,66 +82,107 @@ export default function QuoteGenerator() {
     };
   }, []);
 
-  // Initial setup for the first quote
   useEffect(() => {
-    // Start typing the first quote on component mount
     setDisplayedQuote("");
     setDisplayedAuthor("");
   }, []);
 
-  // Effect for typing animation of quote text
   useEffect(() => {
     if (isTyping && displayedQuote.length < quote.text.length) {
       const timeoutId = setTimeout(() => {
         setDisplayedQuote(quote.text.substring(0, displayedQuote.length + 1));
-      }, 100); // Even slower for a more comfortable reading experience
+      }, 100);
       
       return () => clearTimeout(timeoutId);
     } else if (displayedQuote === quote.text && displayedAuthor.length < quote.author.length) {
-      // Add a small pause before starting to type the author name
       const timeoutId = setTimeout(() => {
         setDisplayedAuthor(quote.author.substring(0, displayedAuthor.length + 1));
-      }, 120); // Slightly slower author typing
+      }, 120);
       
       return () => clearTimeout(timeoutId);
     } else if (displayedAuthor === quote.author) {
-      // Add a pause after typing is complete before moving to the next quote
       setIsTyping(false);
     }
   }, [displayedQuote, displayedAuthor, quote, isTyping]);
 
   return (
-    <div className="flex flex-col items-center justify-center container max-w-7xl mx-auto w-full px-4 mb-[70px] text-[16px] lg:text-[34px]">
-        
-        <div className=" flex flex-col justify-center">
-          <motion.p 
-            className="text-xl text-black leading-relaxed border-[2px] p-[10px] w-[100%] md:w-[680px] lg:w-[680px] "
-            key={quote.text}
-          >
-            "{displayedQuote}<motion.span
-              animate={{ opacity: [0, 1, 0] }}
-              transition={{ repeat: Infinity, duration: 0.8 }}
-              className="inline-block "
+    <div className="flex flex-col items-center justify-center container max-w-7xl mx-auto w-full px-4 mb-[70px] text-[16px] lg:text-[32px] relative">
+      {/* Background decoration */}
+      <div className="absolute inset-0 flex items-center justify-center opacity-5 dark:opacity-10">
+        <div className="text-[200px] lg:text-[400px] font-bold text-gray-400 dark:text-gray-600 select-none">
+          "
+        </div>
+      </div>
+
+      <div className="flex flex-col justify-center relative z-10">
+        {/* Enhanced quote container */}
+        <motion.div 
+          className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700"
+          key={quote.text}
+          initial={{ scale: 0.95, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          {/* Quote icon */}
+          <div className="absolute -top-4 -left-4 bg-blue-600 dark:bg-blue-500 text-white p-3 rounded-full shadow-lg">
+            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-10zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z"/>
+            </svg>
+          </div>
+
+          <div className="p-8 lg:p-10">
+            <motion.p 
+              className="text-gray-800 dark:text-gray-200 leading-relaxed font-medium mb-6 min-h-[3em]"
             >
-              |
-            </motion.span>"
-          </motion.p>
-          <motion.p 
-            className="flex justify-end item-center w-full text-right italic text-black text-lg border-[2px] max-w-[180px] border-t-0 " 
-            key={quote.author}
-          >
-            {displayedAuthor.length > 0 ? `— ${displayedAuthor}` : ""}
-            {displayedAuthor !== quote.author && (
+              "{displayedQuote}
               <motion.span
                 animate={{ opacity: [0, 1, 0] }}
                 transition={{ repeat: Infinity, duration: 0.8 }}
                 className="inline-block ml-1"
               >
                 |
-              </motion.span>
-            )}
-          </motion.p>
+              </motion.span>"
+            </motion.p>
+            
+            {/* Author section with enhanced styling */}
+            <div className="flex justify-end items-center">
+              <motion.p 
+                className="text-right italic text-gray-600 dark:text-gray-400 text-lg lg:text-xl font-medium"
+                key={quote.author}
+              >
+                {displayedAuthor.length > 0 ? `— ${displayedAuthor}` : ""}
+                {displayedAuthor !== quote.author && (
+                  <motion.span
+                    animate={{ opacity: [0, 1, 0] }}
+                    transition={{ repeat: Infinity, duration: 0.8 }}
+                    className="inline-block ml-1"
+                  >
+                    |
+                  </motion.span>
+                )}
+              </motion.p>
+            </div>
+          </div>
+
+          {/* Decorative gradient border */}
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-2xl opacity-20 blur-sm -z-10 group-hover:opacity-30 transition-opacity duration-300" />
+        </motion.div>
+
+        {/* Progress indicator */}
+        <div className="mt-6 flex justify-center space-x-2">
+          {quotes.map((_, index) => (
+            <motion.div
+              key={index}
+              className={`h-2 rounded-full transition-all duration-300 ${
+                quotes.indexOf(quote) === index
+                  ? 'w-8 bg-blue-600 dark:bg-blue-400'
+                  : 'w-2 bg-gray-300 dark:bg-gray-600'
+              }`}
+              layoutId={`indicator-${index}`}
+            />
+          ))}
         </div>
       </div>
+    </div>
   );
 }
