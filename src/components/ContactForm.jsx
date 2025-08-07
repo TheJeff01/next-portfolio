@@ -22,21 +22,28 @@ const ContactForm = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+  e.preventDefault();
+  setIsSubmitting(true);
+  
+  try {
+    const formData = new FormData(e.target);
     
-    // Simulate form submission
-    try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      setSubmitStatus("success");
-      setFormData({ name: "", email: "", subject: "", message: "" });
-    } catch (error) {
-      setSubmitStatus("error");
-    } finally {
-      setIsSubmitting(false);
-      setTimeout(() => setSubmitStatus(null), 5000);
-    }
-  };
+    await fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(formData).toString(),
+    });
+    
+    setSubmitStatus("success");
+    setFormData({ name: "", email: "", subject: "", message: "" });
+  } catch (error) {
+    console.error('Form submission error:', error);
+    setSubmitStatus("error");
+  } finally {
+    setIsSubmitting(false);
+    setTimeout(() => setSubmitStatus(null), 5000);
+  }
+};
 
   const containerVariants = {
     hidden: { opacity: 0 },
