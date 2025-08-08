@@ -4,25 +4,76 @@ import { Images } from "./assets/images/Images";
 import { CiMenuFries } from "react-icons/ci";
 import { IoClose } from "react-icons/io5";
 import { HiSun, HiMoon } from "react-icons/hi";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTheme } from "./ThemeProvider";
 import clsx from "clsx";
 
 function NavBar() {
   const [isSideMenuOpen, setMenu] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const { theme, toggleTheme } = useTheme();
 
+  // Handle scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isSideMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isSideMenuOpen]);
+
   const navLinks = [
-    { label: "Portfolio", link: "#" },
-    { label: "About Me", link: "#" },
-    { label: "My Projects", link: "#" },
-    { label: "Review", link: "#" },
+    { label: "Portfolio", link: "#portfolio" },
+    { label: "About Me", link: "#about" },
+    { label: "My Projects", link: "#projects" },
+    { label: "Review", link: "#review" },
   ];
+
+  // Smooth scroll function
+  const handleSmoothScroll = (e, href) => {
+    e.preventDefault();
+    
+    if (href === "#") return;
+    
+    const element = document.querySelector(href);
+    if (element) {
+      const navHeight = 80; // Adjust based on your navbar height
+      const elementPosition = element.offsetTop - navHeight;
+      
+      window.scrollTo({
+        top: elementPosition,
+        behavior: 'smooth'
+      });
+    }
+    
+    // Close mobile menu if open
+    setMenu(false);
+  };
 
   return (
     <main>
-      {/* Navbar wrapper with enhanced styling */}
-      <nav className="relative p-4 lg:px-8 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-lg border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
+      {/* Enhanced Navbar with better sticky behavior */}
+      <nav className={clsx(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        "p-4 lg:px-8",
+        isScrolled 
+          ? "bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg shadow-lg border-b border-gray-200/50 dark:border-gray-700/50" 
+          : "bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-md border-b border-gray-200 dark:border-gray-700"
+      )}>
         <div className="max-w-7xl mx-auto w-full flex items-center justify-between relative">
           {/* Left - Logo */}
           <div className="flex items-center gap-4">
@@ -34,7 +85,8 @@ function NavBar() {
             {navLinks.map((d, i) => (
               <Link 
                 key={i} 
-                href={d.link} 
+                href={d.link}
+                onClick={(e) => handleSmoothScroll(e, d.link)}
                 className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 font-medium relative group"
               >
                 {d.label}
@@ -60,7 +112,10 @@ function NavBar() {
 
             {/* Desktop contact button */}
             <div className="hidden lg:flex">
-              <button className="flex items-center gap-2 border-2 border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-400 dark:hover:text-gray-900 px-6 py-2 rounded-full transition-all duration-300 font-medium">
+              <button 
+                onClick={(e) => handleSmoothScroll(e, '#contact')}
+                className="flex items-center gap-2 border-2 border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-400 dark:hover:text-gray-900 px-6 py-2 rounded-full transition-all duration-300 font-medium"
+              >
                 <img src={Images.contact} alt="Contact Icon" className="w-5 h-5" />
                 Contact Me
               </button>
@@ -75,16 +130,19 @@ function NavBar() {
         </div>
       </nav>
 
-      {/* Enhanced Mobile Sidebar */}
+      {/* Enhanced Mobile Sidebar with better positioning */}
       <div
         className={clsx(
-          "fixed inset-0 z-40 bg-black/50 backdrop-blur-sm transition-all duration-300 transform lg:hidden",
-          isSideMenuOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
+          "fixed inset-0 z-[60] bg-black/50 backdrop-blur-sm transition-all duration-300 lg:hidden",
+          isSideMenuOpen ? "visible opacity-100" : "invisible opacity-0"
         )}
         onClick={() => setMenu(false)}
       >
         <section 
-          className="absolute right-0 top-0 h-full w-80 bg-white dark:bg-gray-900 shadow-2xl flex flex-col justify-between"
+          className={clsx(
+            "absolute right-0 top-0 h-full w-80 bg-white dark:bg-gray-900 shadow-2xl flex flex-col justify-between transition-transform duration-300 z-[70]",
+            isSideMenuOpen ? "translate-x-0" : "translate-x-full"
+          )}
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header with close button */}
@@ -105,8 +163,8 @@ function NavBar() {
                 <Link
                   key={i}
                   href={d.link}
+                  onClick={(e) => handleSmoothScroll(e, d.link)}
                   className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 text-lg font-medium transition-colors duration-200 py-2 border-b border-gray-100 dark:border-gray-800"
-                  onClick={() => setMenu(false)}
                 >
                   {d.label}
                 </Link>
@@ -129,13 +187,19 @@ function NavBar() {
                 )}
               </button>
             </div>
-            <button className="flex items-center gap-2 border-2 border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-400 dark:hover:text-gray-900 px-6 py-3 rounded-full w-full justify-center transition-all duration-300 font-medium">
+            <button 
+              onClick={(e) => handleSmoothScroll(e, '#contact')}
+              className="flex items-center gap-2 border-2 border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-400 dark:hover:text-gray-900 px-6 py-3 rounded-full w-full justify-center transition-all duration-300 font-medium"
+            >
               <img src={Images.contact} alt="Contact Icon" className="w-5 h-5" />
               Contact Me
             </button>
           </div>
         </section>
       </div>
+
+      {/* Spacer to prevent content from hiding behind fixed navbar */}
+      <div className="h-20"></div>
     </main>
   );
 }

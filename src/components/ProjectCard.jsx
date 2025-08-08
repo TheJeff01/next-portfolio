@@ -34,7 +34,7 @@ function ProjectCard(props) {
         className="block relative z-10"
       >
         {/* Image Container with enhanced effects */}
-        <div className="relative overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 rounded-t-2xl">
+        <div className="relative overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 rounded-t-2xl">
           <img 
             src={props.thumbnail} 
             alt={props.heading}

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { HiMail, HiPhone, HiLocationMarker, HiPaperAirplane } from "react-icons/hi";
 import { FaLinkedin, FaGithub, FaTwitter } from "react-icons/fa";
+import emailjs from '@emailjs/browser';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -22,28 +23,35 @@ const ContactForm = () => {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  setIsSubmitting(true);
-  
-  try {
-    const formData = new FormData(e.target);
+    e.preventDefault();
+    setIsSubmitting(true);
     
-    await fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams(formData).toString(),
-    });
-    
-    setSubmitStatus("success");
-    setFormData({ name: "", email: "", subject: "", message: "" });
-  } catch (error) {
-    console.error('Form submission error:', error);
-    setSubmitStatus("error");
-  } finally {
-    setIsSubmitting(false);
-    setTimeout(() => setSubmitStatus(null), 5000);
-  }
-};
+    try {
+      // EmailJS configuration
+      const serviceID = 'YOUR_SERVICE_ID'; // Replace with your EmailJS service ID
+      const templateID = 'YOUR_TEMPLATE_ID'; // Replace with your EmailJS template ID
+      const publicKey = 'YOUR_PUBLIC_KEY'; // Replace with your EmailJS public key
+
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+        to_name: 'Jeffrey Ibeh', // Your name
+      };
+
+      await emailjs.send(serviceID, templateID, templateParams, publicKey);
+      
+      setSubmitStatus("success");
+      setFormData({ name: "", email: "", subject: "", message: "" });
+    } catch (error) {
+      console.error('EmailJS error:', error);
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+      setTimeout(() => setSubmitStatus(null), 5000);
+    }
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -107,7 +115,7 @@ const ContactForm = () => {
   ];
 
   return (
-    <section className="py-16 lg:py-24 bg-gray-50 dark:bg-gray-900/50 relative overflow-hidden">
+    <section className="py-16 lg:py-24 bg-gray-50 dark:bg-gray-900/50 relative overflow-hidden contact">
       {/* Background decorations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-40 h-40 bg-blue-500/10 dark:bg-blue-400/20 rounded-full blur-3xl" />
