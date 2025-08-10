@@ -27,11 +27,13 @@ const projects = [
     link: "https://social-media-management-tool-lilac.vercel.app/",
   },
   {
-    thumbnail: Images.placeholder,
-    techstack: "NextJS CSS Tailwind",
-    heading: "Blank",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    thumbnail: Images.weather,
+    techstack: "HTML CSS ExpressJS",
+    heading: "Weather App",
+    text: "A simple weather application built with HTML, CSS, and Express.js that fetches real-time weather data from the OpenWeatherMap API based on user input. It showcases my ability to work with APIs, handle user requests, and dynamically display external data.",
+    link: "https://weather-project-production-a76b.up.railway.app/",
   },
+  
 ];
 function MyDevProjects() {
   return (

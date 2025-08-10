@@ -37,11 +37,12 @@ function NavBar() {
   }, [isSideMenuOpen]);
 
   const navLinks = [
-    { label: "Portfolio", link: "#portfolio" },
-    { label: "About Me", link: "#about" },
-    { label: "My Projects", link: "#projects" },
-    { label: "Review", link: "#review" },
-  ];
+  { label: "Portfolio", link: "#home" },
+  { label: "About Me", link: "#about" }, 
+  // { label: "About Page", link: "/about" },
+  { label: "My Projects", link: "#projects" },
+  // { label: "Review", link: "#review" },
+];
 
   // Smooth scroll function
   const handleSmoothScroll = (e, href) => {

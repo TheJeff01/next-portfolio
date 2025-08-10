@@ -155,9 +155,11 @@ function HeroBanner() {
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.95 }}
           >
-            <span className="flex items-center justify-center gap-2">
-              🚀 See my dev work
-            </span>
+            <a href="#projects">
+              <span className="flex items-center justify-center gap-2">
+                🚀 See my dev work
+              </span>
+            </a>
           </motion.button>
 
           <motion.button
