@@ -28,10 +28,10 @@ const projects = [
   },
   {
     thumbnail: Images.weather,
-    techstack: "HTML CSS ExpressJS",
-    heading: "Weather App",
-    text: "A simple weather application built with HTML, CSS, and Express.js that fetches real-time weather data from the OpenWeatherMap API based on user input. It showcases my ability to work with APIs, handle user requests, and dynamically display external data.",
-    link: "https://weather-project-production-a76b.up.railway.app/",
+    techstack: "NextJS CSS",
+    heading: "NESG website",
+    text: "A simple website built using nextJs and Css",
+    link: "http://academy.nesgroup.org/",
   },
   
 ];
